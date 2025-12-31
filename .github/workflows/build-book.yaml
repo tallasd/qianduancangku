@@ -60,6 +60,11 @@ jobs:
           SOURCE_DIR="clone/daily"
           TARGET_CONTENT_DIR="content/cn"
 
+          echo "--- 步骤 0.0: 清理历史内容，仅保留后端 daily 生成的文章 ---"
+          if [ -d "$TARGET_CONTENT_DIR" ]; then
+            find "$TARGET_CONTENT_DIR" -maxdepth 1 -type d -name "????-??" -print -exec rm -rf {} +
+          fi
+
           # --- 新增: 读取默认 description ---
           echo "--- 步骤 0.1: 读取默认描述信息 ---"
           DEFAULT_DESCRIPTION=""
